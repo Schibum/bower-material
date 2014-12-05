@@ -50,11 +50,6 @@ md-bottom-sheet.md-amber-theme {
     background-color: transparent;
     cursor: not-allowed; }
 
-md-card.md-amber-theme {
-  border-radius: 2px; }
-  md-card.md-amber-theme .md-card-image {
-    border-radius: 2px 2px 0 0; }
-
 md-checkbox.md-amber-theme .md-ripple {
   color: #43a047; }
 md-checkbox.md-amber-theme.md-checked .md-ripple {
@@ -69,6 +64,11 @@ md-checkbox.md-amber-theme[disabled] .md-icon {
   border-color: rgba(0, 0, 0, 0.26); }
 md-checkbox.md-amber-theme[disabled].md-checked .md-icon {
   background-color: rgba(0, 0, 0, 0.26); }
+
+md-card.md-amber-theme {
+  border-radius: 2px; }
+  md-card.md-amber-theme .md-card-image {
+    border-radius: 2px 2px 0 0; }
 
 md-content.md-amber-theme {
   background-color: #ffffff; }

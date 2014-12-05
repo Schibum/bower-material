@@ -4,7 +4,7 @@
  * @license MIT
  * v0.6.0-cf
  */
-angular.module('ngMaterial', ["ng","ngAnimate","ngAria","material.core","material.components.backdrop","material.components.bottomSheet","material.components.button","material.components.card","material.components.checkbox","material.components.content","material.components.dialog","material.components.divider","material.components.icon","material.components.list","material.components.progressCircular","material.components.progressLinear","material.components.radioButton","material.components.sidenav","material.components.slider","material.components.sticky","material.components.subheader","material.components.swipe","material.components.switch","material.components.tabs","material.components.textField","material.components.toast","material.components.toolbar","material.components.tooltip","material.components.whiteframe"]);
+angular.module('ngMaterial', ["ng","ngAnimate","ngAria","material.core","material.components.backdrop","material.components.bottomSheet","material.components.button","material.components.checkbox","material.components.card","material.components.content","material.components.dialog","material.components.divider","material.components.icon","material.components.list","material.components.progressCircular","material.components.progressLinear","material.components.radioButton","material.components.sidenav","material.components.slider","material.components.sticky","material.components.subheader","material.components.swipe","material.components.switch","material.components.tabs","material.components.textField","material.components.toast","material.components.toolbar","material.components.tooltip","material.components.whiteframe"]);
 (function() {
 'use strict';
 
@@ -2031,59 +2031,6 @@ MdButtonDirective.$inject = ["$mdInkRipple", "$mdTheming", "$mdAria"];
 
 /**
  * @ngdoc module
- * @name material.components.card
- *
- * @description
- * Card components.
- */
-angular.module('material.components.card', [
-  'material.core'
-])
-  .directive('mdCard', mdCardDirective);
-
-
-
-/**
- * @ngdoc directive
- * @name mdCard
- * @module material.components.card
- *
- * @restrict E
- *
- * @description
- * The `<md-card>` directive is a container element used within `<md-content>` containers.
- *
- * Cards have constant width and variable heights; where the maximum height is limited to what can
- * fit within a single view on a platform, but it can temporarily expand as needed
- *
- * @usage
- * <hljs lang="html">
- * <md-card>
- *  <img src="img/washedout.png" class="md-card-image">
- *  <h2>Paracosm</h2>
- *  <p>
- *    The titles of Washed Out's breakthrough song and the first single from Paracosm share the * two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
- *  </p>
- * </md-card>
- * </hljs>
- *
- */
-function mdCardDirective($mdTheming) {
-  return {
-    restrict: 'E',
-    link: function($scope, $element, $attr) {
-      $mdTheming($element);
-    }
-  };
-}
-mdCardDirective.$inject = ["$mdTheming"];
-})();
-
-(function() {
-'use strict';
-
-/**
- * @ngdoc module
  * @name material.components.checkbox
  * @description Checkbox module!
  */
@@ -2210,6 +2157,59 @@ function MdCheckboxDirective(inputDirective, $mdInkRipple, $mdAria, $mdConstant,
 }
 MdCheckboxDirective.$inject = ["inputDirective", "$mdInkRipple", "$mdAria", "$mdConstant", "$mdTheming"];
 
+})();
+
+(function() {
+'use strict';
+
+/**
+ * @ngdoc module
+ * @name material.components.card
+ *
+ * @description
+ * Card components.
+ */
+angular.module('material.components.card', [
+  'material.core'
+])
+  .directive('mdCard', mdCardDirective);
+
+
+
+/**
+ * @ngdoc directive
+ * @name mdCard
+ * @module material.components.card
+ *
+ * @restrict E
+ *
+ * @description
+ * The `<md-card>` directive is a container element used within `<md-content>` containers.
+ *
+ * Cards have constant width and variable heights; where the maximum height is limited to what can
+ * fit within a single view on a platform, but it can temporarily expand as needed
+ *
+ * @usage
+ * <hljs lang="html">
+ * <md-card>
+ *  <img src="img/washedout.png" class="md-card-image">
+ *  <h2>Paracosm</h2>
+ *  <p>
+ *    The titles of Washed Out's breakthrough song and the first single from Paracosm share the * two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+ *  </p>
+ * </md-card>
+ * </hljs>
+ *
+ */
+function mdCardDirective($mdTheming) {
+  return {
+    restrict: 'E',
+    link: function($scope, $element, $attr) {
+      $mdTheming($element);
+    }
+  };
+}
+mdCardDirective.$inject = ["$mdTheming"];
 })();
 
 (function() {
@@ -3865,10 +3865,9 @@ function SliderController($scope, $element, $attrs, $$rAF, $window, $mdAria, $md
     var tickContainer = angular.element($element[0].querySelector('.md-track-ticks'));
     var throttledRefreshDimensions = $mdUtil.throttle(refreshSliderDimensions, 5000);
 
-    // Default values, overridable by $attrss
-    $attrs.min ? $attrs.$observe('min', updateMin) : updateMin(0);
-    $attrs.max ? $attrs.$observe('max', updateMax) : updateMax(100);
-    $attrs.step ? $attrs.$observe('step', updateStep) : updateStep(1);
+    $attrs.$observe('min', updateMin);
+    $attrs.$observe('max', updateMax);
+    $attrs.$observe('step', updateStep);
 
     // We have to manually stop the $watch on ngDisabled because it exists
     // on the parent $scope, and won't be automatically destroyed when
@@ -3923,17 +3922,17 @@ function SliderController($scope, $element, $attrs, $$rAF, $window, $mdAria, $md
     var max;
     var step;
     function updateMin(value) {
-      min = parseFloat(value);
+      min = value ? parseFloat(value) : 0;
       $element.attr('aria-valuemin', value);
       updateAll();
     }
     function updateMax(value) {
-      max = parseFloat(value);
+      max = value ? parseFloat(value) : 100;
       $element.attr('aria-valuemax', value);
       updateAll();
     }
     function updateStep(value) {
-      step = parseFloat(value);
+      step = value ? parseFloat(value) : 1;
       redrawTicks();
     }
     function updateAriaDisabled(isDisabled) {
