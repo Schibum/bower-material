@@ -2,7 +2,7 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v0.6.0-cf
+ * v0.6.0-cf2
  */
 md-backdrop.md-opaque.md-cyan-theme {
   background-color: rgba(0, 0, 0, 0.3);
@@ -50,6 +50,14 @@ md-bottom-sheet.md-cyan-theme {
     background-color: transparent;
     cursor: not-allowed; }
 
+md-card.md-cyan-theme {
+  border-radius: 2px; }
+  md-card.md-cyan-theme .md-card-image {
+    border-radius: 2px 2px 0 0; }
+
+md-content.md-cyan-theme {
+  background-color: #ffffff; }
+
 md-checkbox.md-cyan-theme .md-ripple {
   color: #43a047; }
 md-checkbox.md-cyan-theme.md-checked .md-ripple {
@@ -64,14 +72,6 @@ md-checkbox.md-cyan-theme[disabled] .md-icon {
   border-color: rgba(0, 0, 0, 0.26); }
 md-checkbox.md-cyan-theme[disabled].md-checked .md-icon {
   background-color: rgba(0, 0, 0, 0.26); }
-
-md-card.md-cyan-theme {
-  border-radius: 2px; }
-  md-card.md-cyan-theme .md-card-image {
-    border-radius: 2px 2px 0 0; }
-
-md-content.md-cyan-theme {
-  background-color: #ffffff; }
 
 md-dialog.md-cyan-theme {
   border-radius: 4px;

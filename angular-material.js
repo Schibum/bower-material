@@ -2,9 +2,9 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v0.6.0-cf
+ * v0.6.0-cf2
  */
-angular.module('ngMaterial', ["ng","ngAnimate","ngAria","material.core","material.components.backdrop","material.components.bottomSheet","material.components.button","material.components.checkbox","material.components.card","material.components.content","material.components.dialog","material.components.divider","material.components.icon","material.components.list","material.components.progressCircular","material.components.progressLinear","material.components.radioButton","material.components.sidenav","material.components.slider","material.components.sticky","material.components.subheader","material.components.swipe","material.components.switch","material.components.tabs","material.components.textField","material.components.toast","material.components.toolbar","material.components.tooltip","material.components.whiteframe"]);
+angular.module('ngMaterial', ["ng","ngAnimate","ngAria","material.core","material.components.backdrop","material.components.bottomSheet","material.components.button","material.components.card","material.components.content","material.components.checkbox","material.components.dialog","material.components.divider","material.components.icon","material.components.list","material.components.progressCircular","material.components.progressLinear","material.components.radioButton","material.components.sidenav","material.components.slider","material.components.sticky","material.components.swipe","material.components.subheader","material.components.switch","material.components.tabs","material.components.textField","material.components.toast","material.components.toolbar","material.components.tooltip","material.components.whiteframe"]);
 (function() {
 'use strict';
 
@@ -2031,6 +2031,114 @@ MdButtonDirective.$inject = ["$mdInkRipple", "$mdTheming", "$mdAria"];
 
 /**
  * @ngdoc module
+ * @name material.components.card
+ *
+ * @description
+ * Card components.
+ */
+angular.module('material.components.card', [
+  'material.core'
+])
+  .directive('mdCard', mdCardDirective);
+
+
+
+/**
+ * @ngdoc directive
+ * @name mdCard
+ * @module material.components.card
+ *
+ * @restrict E
+ *
+ * @description
+ * The `<md-card>` directive is a container element used within `<md-content>` containers.
+ *
+ * Cards have constant width and variable heights; where the maximum height is limited to what can
+ * fit within a single view on a platform, but it can temporarily expand as needed
+ *
+ * @usage
+ * <hljs lang="html">
+ * <md-card>
+ *  <img src="img/washedout.png" class="md-card-image">
+ *  <h2>Paracosm</h2>
+ *  <p>
+ *    The titles of Washed Out's breakthrough song and the first single from Paracosm share the * two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+ *  </p>
+ * </md-card>
+ * </hljs>
+ *
+ */
+function mdCardDirective($mdTheming) {
+  return {
+    restrict: 'E',
+    link: function($scope, $element, $attr) {
+      $mdTheming($element);
+    }
+  };
+}
+mdCardDirective.$inject = ["$mdTheming"];
+})();
+
+(function() {
+'use strict';
+
+/**
+ * @ngdoc module
+ * @name material.components.content
+ *
+ * @description
+ * Scrollable content
+ */
+angular.module('material.components.content', [
+  'material.core'
+])
+  .directive('mdContent', mdContentDirective);
+
+/**
+ * @ngdoc directive
+ * @name mdContent
+ * @module material.components.content
+ *
+ * @restrict E
+ *
+ * @description
+ * The `<md-content>` directive is a container element useful for scrollable content
+ *
+ * ### Restrictions
+ *
+ * - Add the `md-padding` class to make the content padded.
+ *
+ * @usage
+ * <hljs lang="html">
+ *  <md-content class="md-padding">
+ *      Lorem ipsum dolor sit amet, ne quod novum mei.
+ *  </md-content>
+ * </hljs>
+ *
+ */
+function mdContentDirective($mdTheming) {
+  return {
+    restrict: 'E',
+    controller: ['$scope', '$element', ContentController],
+    link: function($scope, $element, $attr) {
+      $mdTheming($element);
+      $scope.$broadcast('$mdContentLoaded', $element);
+    }
+  };
+
+  function ContentController($scope, $element) {
+    this.$scope = $scope;
+    this.$element = $element;
+  }
+}
+mdContentDirective.$inject = ["$mdTheming"];
+})();
+
+(function() {
+'use strict';
+
+/**
+ * @ngdoc module
  * @name material.components.checkbox
  * @description Checkbox module!
  */
@@ -2157,114 +2265,6 @@ function MdCheckboxDirective(inputDirective, $mdInkRipple, $mdAria, $mdConstant,
 }
 MdCheckboxDirective.$inject = ["inputDirective", "$mdInkRipple", "$mdAria", "$mdConstant", "$mdTheming"];
 
-})();
-
-(function() {
-'use strict';
-
-/**
- * @ngdoc module
- * @name material.components.card
- *
- * @description
- * Card components.
- */
-angular.module('material.components.card', [
-  'material.core'
-])
-  .directive('mdCard', mdCardDirective);
-
-
-
-/**
- * @ngdoc directive
- * @name mdCard
- * @module material.components.card
- *
- * @restrict E
- *
- * @description
- * The `<md-card>` directive is a container element used within `<md-content>` containers.
- *
- * Cards have constant width and variable heights; where the maximum height is limited to what can
- * fit within a single view on a platform, but it can temporarily expand as needed
- *
- * @usage
- * <hljs lang="html">
- * <md-card>
- *  <img src="img/washedout.png" class="md-card-image">
- *  <h2>Paracosm</h2>
- *  <p>
- *    The titles of Washed Out's breakthrough song and the first single from Paracosm share the * two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
- *  </p>
- * </md-card>
- * </hljs>
- *
- */
-function mdCardDirective($mdTheming) {
-  return {
-    restrict: 'E',
-    link: function($scope, $element, $attr) {
-      $mdTheming($element);
-    }
-  };
-}
-mdCardDirective.$inject = ["$mdTheming"];
-})();
-
-(function() {
-'use strict';
-
-/**
- * @ngdoc module
- * @name material.components.content
- *
- * @description
- * Scrollable content
- */
-angular.module('material.components.content', [
-  'material.core'
-])
-  .directive('mdContent', mdContentDirective);
-
-/**
- * @ngdoc directive
- * @name mdContent
- * @module material.components.content
- *
- * @restrict E
- *
- * @description
- * The `<md-content>` directive is a container element useful for scrollable content
- *
- * ### Restrictions
- *
- * - Add the `md-padding` class to make the content padded.
- *
- * @usage
- * <hljs lang="html">
- *  <md-content class="md-padding">
- *      Lorem ipsum dolor sit amet, ne quod novum mei.
- *  </md-content>
- * </hljs>
- *
- */
-function mdContentDirective($mdTheming) {
-  return {
-    restrict: 'E',
-    controller: ['$scope', '$element', ContentController],
-    link: function($scope, $element, $attr) {
-      $mdTheming($element);
-      $scope.$broadcast('$mdContentLoaded', $element);
-    }
-  };
-
-  function ContentController($scope, $element) {
-    this.$scope = $scope;
-    this.$element = $element;
-  }
-}
-mdContentDirective.$inject = ["$mdTheming"];
 })();
 
 (function() {
@@ -4468,87 +4468,6 @@ MdSticky.$inject = ["$document", "$mdConstant", "$compile", "$$rAF", "$mdUtil"];
 (function() {
 'use strict';
 
-/**
- * @ngdoc module
- * @name material.components.subheader
- * @description
- * SubHeader module
- *
- *  Subheaders are special list tiles that delineate distinct sections of a
- *  list or grid list and are typically related to the current filtering or
- *  sorting criteria. Subheader tiles are either displayed inline with tiles or
- *  can be associated with content, for example, in an adjacent column.
- *
- *  Upon scrolling, subheaders remain pinned to the top of the screen and remain
- *  pinned until pushed on or off screen by the next subheader. @see [Material
- *  Design Specifications](https://www.google.com/design/spec/components/subheaders.html)
- *
- *  > To improve the visual grouping of content, use the system color for your subheaders.
- *
- */
-angular.module('material.components.subheader', [
-  'material.core',
-  'material.components.sticky'
-])
-  .directive('mdSubheader', MdSubheaderDirective);
-
-/**
- * @ngdoc directive
- * @name mdSubheader
- * @module material.components.subheader
- *
- * @restrict E
- *
- * @description
- * The `<md-subheader>` directive is a subheader for a section
- *
- * @usage
- * <hljs lang="html">
- * <md-subheader>Online Friends</md-subheader>
- * </hljs>
- */
-
-function MdSubheaderDirective($mdSticky, $compile, $mdTheming) {
-  return {
-    restrict: 'E',
-    replace: true,
-    transclude: true,
-    template: 
-      '<h2 class="md-subheader">' +
-        '<span class="md-subheader-content"></span>' +
-      '</h2>',
-    compile: function(element, attr, transclude) {
-      var outerHTML = element[0].outerHTML;
-      return function postLink(scope, element, attr) {
-        $mdTheming(element);
-        function getContent(el) {
-          return angular.element(el[0].querySelector('.md-subheader-content'));
-        }
-
-        // Transclude the user-given contents of the subheader
-        // the conventional way.
-        transclude(scope, function(clone) {
-          getContent(element).append(clone);
-        });
-
-        // Create another clone, that uses the outer and inner contents
-        // of the element, that will be 'stickied' as the user scrolls.
-        transclude(scope, function(clone) {
-          var stickyClone = $compile(angular.element(outerHTML))(scope);
-          $mdTheming(stickyClone);
-          getContent(stickyClone).append(clone);
-          $mdSticky(scope, element, stickyClone);
-        });
-      };
-    }
-  };
-}
-MdSubheaderDirective.$inject = ["$mdSticky", "$compile", "$mdTheming"];
-})();
-
-(function() {
-'use strict';
-
 
 /**
  * @ngdoc module
@@ -4752,6 +4671,87 @@ function swipePostLink($parse, $mdSwipe, name ) {
   };
 }
 
+})();
+
+(function() {
+'use strict';
+
+/**
+ * @ngdoc module
+ * @name material.components.subheader
+ * @description
+ * SubHeader module
+ *
+ *  Subheaders are special list tiles that delineate distinct sections of a
+ *  list or grid list and are typically related to the current filtering or
+ *  sorting criteria. Subheader tiles are either displayed inline with tiles or
+ *  can be associated with content, for example, in an adjacent column.
+ *
+ *  Upon scrolling, subheaders remain pinned to the top of the screen and remain
+ *  pinned until pushed on or off screen by the next subheader. @see [Material
+ *  Design Specifications](https://www.google.com/design/spec/components/subheaders.html)
+ *
+ *  > To improve the visual grouping of content, use the system color for your subheaders.
+ *
+ */
+angular.module('material.components.subheader', [
+  'material.core',
+  'material.components.sticky'
+])
+  .directive('mdSubheader', MdSubheaderDirective);
+
+/**
+ * @ngdoc directive
+ * @name mdSubheader
+ * @module material.components.subheader
+ *
+ * @restrict E
+ *
+ * @description
+ * The `<md-subheader>` directive is a subheader for a section
+ *
+ * @usage
+ * <hljs lang="html">
+ * <md-subheader>Online Friends</md-subheader>
+ * </hljs>
+ */
+
+function MdSubheaderDirective($mdSticky, $compile, $mdTheming) {
+  return {
+    restrict: 'E',
+    replace: true,
+    transclude: true,
+    template: 
+      '<h2 class="md-subheader">' +
+        '<span class="md-subheader-content"></span>' +
+      '</h2>',
+    compile: function(element, attr, transclude) {
+      var outerHTML = element[0].outerHTML;
+      return function postLink(scope, element, attr) {
+        $mdTheming(element);
+        function getContent(el) {
+          return angular.element(el[0].querySelector('.md-subheader-content'));
+        }
+
+        // Transclude the user-given contents of the subheader
+        // the conventional way.
+        transclude(scope, function(clone) {
+          getContent(element).append(clone);
+        });
+
+        // Create another clone, that uses the outer and inner contents
+        // of the element, that will be 'stickied' as the user scrolls.
+        transclude(scope, function(clone) {
+          var stickyClone = $compile(angular.element(outerHTML))(scope);
+          $mdTheming(stickyClone);
+          getContent(stickyClone).append(clone);
+          $mdSticky(scope, element, stickyClone);
+        });
+      };
+    }
+  };
+}
+MdSubheaderDirective.$inject = ["$mdSticky", "$compile", "$mdTheming"];
 })();
 
 (function() {
