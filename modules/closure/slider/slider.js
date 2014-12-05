@@ -2,7 +2,7 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v0.6.0-cf2
+ * v0.6.0-cf3
  */
 goog.provide('ng.material.components.slider');
 goog.require('ng.material.core');
@@ -110,6 +110,10 @@ function SliderController($scope, $element, $attrs, $$rAF, $window, $mdAria, $md
     var tickContainer = angular.element($element[0].querySelector('.md-track-ticks'));
     var throttledRefreshDimensions = $mdUtil.throttle(refreshSliderDimensions, 5000);
 
+    // Default values, overridable by $attrss
+    updateMin(0);
+    updateMax(100);
+    updateStep(1);
     $attrs.$observe('min', updateMin);
     $attrs.$observe('max', updateMax);
     $attrs.$observe('step', updateStep);
@@ -167,17 +171,17 @@ function SliderController($scope, $element, $attrs, $$rAF, $window, $mdAria, $md
     var max;
     var step;
     function updateMin(value) {
-      min = value ? parseFloat(value) : 0;
+      min = parseFloat(value);
       $element.attr('aria-valuemin', value);
       updateAll();
     }
     function updateMax(value) {
-      max = value ? parseFloat(value) : 100;
+      max = parseFloat(value);
       $element.attr('aria-valuemax', value);
       updateAll();
     }
     function updateStep(value) {
-      step = value ? parseFloat(value) : 1;
+      step = parseFloat(value);
       redrawTicks();
     }
     function updateAriaDisabled(isDisabled) {
