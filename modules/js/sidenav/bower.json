@@ -1,8 +1,8 @@
 {
   "name": "angular-material-sidenav",
-  "version": "v0.6.0-cf",
+  "version": "0.6.0-cf",
   "dependencies": {
-    "angular-material-core": "v0.6.0-cf",
-    "angular-material-backdrop": "v0.6.0-cf"
+    "angular-material-core": "0.6.0-cf",
+    "angular-material-backdrop": "0.6.0-cf"
   }
 }
