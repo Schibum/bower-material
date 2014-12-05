@@ -2,7 +2,7 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * vcf-v0.6.0
+ * vv0.6.0-cf
  */
 angular.module('ngMaterial', ["ng","ngAnimate","ngAria","material.core","material.components.backdrop","material.components.bottomSheet","material.components.button","material.components.card","material.components.checkbox","material.components.content","material.components.dialog","material.components.divider","material.components.icon","material.components.list","material.components.progressCircular","material.components.progressLinear","material.components.radioButton","material.components.sidenav","material.components.slider","material.components.sticky","material.components.subheader","material.components.swipe","material.components.switch","material.components.tabs","material.components.textField","material.components.toast","material.components.toolbar","material.components.tooltip","material.components.whiteframe"]);
 (function() {
@@ -4039,10 +4039,7 @@ function SliderController($scope, $element, $attrs, $$rAF, $window, $mdAria, $md
      */
     function setSliderPercent(percent) {
       activeTrack.css('width', (percent * 100) + '%');
-      thumbContainer.css(
-        $mdConstant.CSS.TRANSFORM,
-        'translate3d(' + getSliderDimensions().width * percent + 'px,0,0)'
-      );
+      thumbContainer.css('left', (percent * 100) + '%');
       $element.toggleClass('md-min', percent === 0);
     }
 

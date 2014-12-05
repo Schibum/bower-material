@@ -1,8 +1,8 @@
 {
   "name": "angular-material-toolbar",
-  "version": "cf-v0.6.0",
+  "version": "v0.6.0-cf",
   "dependencies": {
-    "angular-material-core": "cf-v0.6.0",
-    "angular-material-content": "cf-v0.6.0"
+    "angular-material-core": "v0.6.0-cf",
+    "angular-material-content": "v0.6.0-cf"
   }
 }

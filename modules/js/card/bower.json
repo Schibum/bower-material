@@ -1,7 +1,7 @@
 {
   "name": "angular-material-card",
-  "version": "cf-v0.6.0",
+  "version": "v0.6.0-cf",
   "dependencies": {
-    "angular-material-core": "cf-v0.6.0"
+    "angular-material-core": "v0.6.0-cf"
   }
 }
